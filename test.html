@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>360度画像ビューア</title>
+  <style>
+    .hacosco-embed {
+      position: relative;
+      width: 80%;
+      max-width: 800px;
+      aspect-ratio: 16 / 9;
+      margin: 0 auto;
+    }
+    .hacosco-embed iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .arrow-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px;
+      height: 64px;
+      cursor: pointer;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+  <h1>360度ビューを体験！</h1>
+
+  <!-- ▼ Hacosco 埋め込み＋矢印切替 ▼ -->
+  <div class="hacosco-embed">
+    <img src="arrow.png" class="arrow-button" id="arrowBtn" alt="次へ">
+    <iframe id="hacoscoFrame" src="https://store.hacosco.com/movies/3bd0af8b-1ec2-429e-825c-592f97778652/content"
+            allowfullscreen allowvr>
+    </iframe>
+  </div>
+
+  <script>
+    const arrowBtn = document.getElementById('arrowBtn');
+    const hacoscoFrame = document.getElementById('hacoscoFrame');
+
+    let showingFirst = true;
+
+    arrowBtn.addEventListener('click', () => {
+      if (showingFirst) {
+        hacoscoFrame.src = "https://store.hacosco.com/movies/b63ce18d-1a8b-432f-a5d0-ede59364f3cf/content";
+        arrowBtn.src = "arrow2.png"; // ↓向きに変更
+        showingFirst = false;
+      } else {
+        hacoscoFrame.src = "https://store.hacosco.com/movies/3bd0af8b-1ec2-429e-825c-592f97778652/content";
+        arrowBtn.src = "arrow.png"; // ↑向きに戻す
+        showingFirst = true;
+      }
+    });
+  </script>
+</body>
+</html>
